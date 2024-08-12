@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :plants do
     resources :rentings, only: [:create]
   end
-  get "/dashboard", to: "dahsboard#dashboard", as: "dashboard"
-  patch "/dashboard", to: "dashboard#accept"
-  patch "dashboard", to: "dashboard#deny"
+  get "/dashboard", to: "pages#dashboard", as: "dashboard"
+  patch "/dashboard", to: "rentings#accept"
+  patch "/dashboard", to: "rentings#deny"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
