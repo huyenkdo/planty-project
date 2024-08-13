@@ -1,8 +1,10 @@
 class PlantsController < ApplicationController
   def index
+    @plants = Plant.all
   end
 
   def show
+    @plants = Plant.new
   end
 
   def new

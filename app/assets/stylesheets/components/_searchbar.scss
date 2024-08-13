@@ -1,0 +1,19 @@
+/* Styles pour la barre de recherche */
+.form-control {
+  border: none;
+  width: 800px;
+  height: 55px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar .input-group-text {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 50px 0 0 50px;
+}
+
+.search-bar .input-group-text i {
+  color: #ffffff;
+}
