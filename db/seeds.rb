@@ -67,7 +67,7 @@ puts "#{Plant.count} plants created!"
 renting1 = Renting.create!(
   start_date: Date.today,
   end_date: Date.today + 7.days,
-  status: "accepted",
+  status: "Demande acceptée",
   plant_id: Plant.find_by(name: "Ficus Benjamina").id,
   user_id: user2.id
 )
@@ -75,7 +75,7 @@ renting1 = Renting.create!(
 renting2 = Renting.create!(
   start_date: Date.today + 1.day,
   end_date: Date.today + 10.days,
-  status: "refused",
+  status: "Demande en attente",
   plant_id: Plant.find_by(name: "Monstera Deliciosa").id,
   user_id: user1.id
 )
