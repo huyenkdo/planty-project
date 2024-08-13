@@ -4,7 +4,8 @@ class PlantsController < ApplicationController
   end
 
   def show
-    @plants = Plant.new
+    @plant = Plant.find(params[:id])
+    @renting = Renting.new
   end
 
   def new
