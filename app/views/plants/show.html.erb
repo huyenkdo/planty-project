@@ -1,2 +1,45 @@
-<h1>Plants#show</h1>
-<p>Find me in app/views/plants/show.html.erb</p>
+<h1><%= @plant.name %></h1>
+
+  <div class="container mt-5">
+        <div class="row">
+            <!-- Left Content -->
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <img src="https://via.placeholder.com/750x300" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-success"> <%= @plant.name %> </h5>
+                        <p class="card-text text-muted"> <%= @plant.category %> </p>
+                        <p class="card-text">
+                            <%= @plant.description %>
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Owner">
+                            <div>
+                                <strong> <%= @plant.user.first_name %> </strong><br>
+                                <small>Membre de Planty depuis 2024</small><br>
+                                <small>Paris 75015</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="col-md-4">
+                <div class="price-box">
+                    <h4> <% "#{@plant.price} par jour" %></h4>
+                      <div class="mb-3">
+                        <%= simple_form_for([@plant, @renting], html: {
+                          data: { controller: 'datepicker' }}) do |f| %>
+                            <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: 'startDateInput'} } %>
+                            <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: 'endDateInput'} } %>
+                            <%= f.submit 'Book now!', class: 'btn btn-primary' %>
+                          <% end %>
+                          <%# <input type="date" class="form-control" id="startDate" value="2024-06-10"> %>
+                      </div>
+                    <hr>
+                    <h4>Total <span class="float-end">54€</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
