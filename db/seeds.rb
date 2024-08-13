@@ -1,10 +1,10 @@
 require 'faker'
 
+Renting.destroy_all
+puts "everything destroyed"
 Plant.destroy_all
 puts "everything destroyed"
 User.destroy_all
-puts "everything destroyed"
-Renting.destroy_all
 puts "everything destroyed"
 
 
@@ -67,7 +67,7 @@ puts "#{Plant.count} plants created!"
 renting1 = Renting.create!(
   start_date: Date.today,
   end_date: Date.today + 7.days,
-  status: "disponible",
+  status: "accepted",
   plant_id: Plant.find_by(name: "Ficus Benjamina").id,
   user_id: user2.id
 )
@@ -75,7 +75,7 @@ renting1 = Renting.create!(
 renting2 = Renting.create!(
   start_date: Date.today + 1.day,
   end_date: Date.today + 10.days,
-  status: "non disponible",
+  status: "refused",
   plant_id: Plant.find_by(name: "Monstera Deliciosa").id,
   user_id: user1.id
 )
