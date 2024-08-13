@@ -1,1 +1,28 @@
 <h1>Dashboard</h1>
+<img src="<%= image_path('user_icon.png') %>" alt="default user photo">
+<h2><%= @user.first_name %> <%= @user.last_name %></h2>
+<p>Membre de Planty depuis <%= @user.created_at.year %></p>
+<p><%= @user.address %></p>
+<p><%= @user.email %></p>
+<h2>Tes plantes</h2>
+<ul>
+  <% @own_plants.each do |plant| %>
+    <li><%= link_to plant.name, plant_path(plant) %></li>
+  <% end %>
+</ul>
+<h2>Demandes de location</h2>
+<ul>
+  <% @own_plants.each do |plant| %>
+    <% requests = plant.rentings %>
+    <% requests.each do |request| %>
+      <li><%= request.status %> pour <%= plant.name %></li>
+    <% end %>
+  <% end %>
+</ul>
+<h2>Plantes louées</h2>
+<ul>
+  <% @rentings.each do |renting| %>
+    <p><%= renting.plant.name %></p>
+    <p><%= renting.start_date.day %>/<%= renting.start_date.month %>/<%= renting.start_date.year %> - <%= renting.end_date.day %>/<%= renting.end_date.month %>/<%= renting.end_date.year %></p>
+  <% end %>
+</ul>
