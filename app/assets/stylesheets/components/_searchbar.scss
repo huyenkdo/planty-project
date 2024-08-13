@@ -1,4 +1,3 @@
-/* Styles pour la barre de recherche */
 .form-control {
   border: none;
   width: 800px;
@@ -9,11 +8,29 @@
 }
 
 .search-bar .input-group-text {
-  background-color: rgb(255, 255, 255);
   border: none;
   border-radius: 50px 0 0 50px;
 }
 
 .search-bar .input-group-text i {
   color: #ffffff;
+}
+
+.banner-plant {
+  width: 500px;
+}
+
+.container-banner {
+  background-image: url('./plants.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchbar {
+  width: 100%;
+  max-width: 800px;
 }
