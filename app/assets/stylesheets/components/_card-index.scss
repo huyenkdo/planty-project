@@ -1,4 +1,4 @@
-.container-card {
+.container-card-index {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -6,31 +6,32 @@
   padding: 40px;
 }
 
-.card {
+.card-index {
   flex: 1 1 calc(30% - 20px);
   max-width: 300px;
-  max-height: 350px;
+  max-height: 800px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 }
 
-.card-img-top {
+.card-index-img-top {
   width: 100%;
   height: 60%;
 }
 
-.card-body {
+.card-index-body {
   padding: 15px;
 }
 
-.card-title {
+.card-index-title {
   margin-bottom: 10px;
   font-weight: 800;
 }
 
-.card-text {
+.card-index-text {
   margin-bottom: 15px;
+  font-size: small;
 }
 
 .btn-primary {
@@ -53,7 +54,7 @@
 }
 
 .placeholder-glow {
-  animation: placeholderShimmer 1.5s infinite;
+  animation: placeholderShimmer 5s infinite;
 }
 
 @keyframes placeholderShimmer {
