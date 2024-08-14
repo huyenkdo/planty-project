@@ -78,7 +78,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  # <<: *default
+  # database: planty_project_production
+  # username: planty_project
+  # password: <%= ENV["PLANTY_PROJECT_DATABASE_PASSWORD"] %>
   <<: *default
-  database: planty_project_production
-  username: planty_project
-  password: <%= ENV["PLANTY_PROJECT_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
