@@ -6,6 +6,8 @@ class PlantsController < ApplicationController
   def show
     @plant = Plant.find(params[:id])
     @renting = Renting.new
+    @user = current_user
+    
   end
 
   def new
