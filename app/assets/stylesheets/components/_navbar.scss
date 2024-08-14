@@ -1,7 +1,14 @@
+/* app/assets/stylesheets/application.css */
+
 .navbar {
   justify-content: space-between;
   background: #F9E9DA;
   padding: 5px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar .navbar-collapse {
@@ -10,6 +17,18 @@
 
 .navbar .navbar-brand img {
   width: 40px;
+}
+
+.navbar-brand-btn {
+  color: #287A13;
+  text-decoration: none;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+.navbar-brand-btn:hover {
+  color: #416d35;
 }
 
 .create-btn {
@@ -32,17 +51,15 @@
   width: 30px;
   height: 30px;
   border: none;
-  cursor: pointer;
   background-color: transparent;
+}
+
+.profil-btn:hover {
+  color: #287A13;
 }
 
 .create-btn:hover {
   background-color: #c2e5b8;
-}
-
-.navbar-brand {
-  color: #287A13;
-  font-size: 35px;
 }
 
 .container-button {
@@ -56,4 +73,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+}
+
+body {
+  padding-top: 0px;
 }
