@@ -1,74 +1,74 @@
-<h1><%= @plant.name %></h1>
 
-  <div class="container mt-5" style="margin-top: 63px">
-        <div class="row">
-            <!-- Left Content -->
-            <div class="col-md-8">
-                <div class="card mb-3">
-                     <!-- Carrousel -->
-                  <div id="carouselExample<%= @plant.id %>" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      <% @plant.photos.each_with_index do |photo, img_index| %>
-                        <div class="carousel-item <%= 'active' if img_index == 0 %>">
-                          <%= cl_image_tag photo.key, class: "d-block w-100 custom-carousel-image", crop: "pad", width: 750, height: 375, background: "auto", alt: @plant.name %>
-                        </div>
-                      <% end %>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                  <!-- Fin du Carrousel -->
-                  <div class="card-show">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="card-title text-success"> <%= @plant.name %>
-                        </h5>
-
-                            <% if @plant.user == @user %>
-                          <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
-                           <% end %>
-
+<div class="container mt-5" style="margin-top: 63px">
+  <h1><%= @plant.name %></h1>
+      <div class="row">
+          <!-- Left Content -->
+          <div class="col-md-8">
+              <div class="card mb-3">
+                    <!-- Carrousel -->
+                <div id="carouselExample<%= @plant.id %>" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <% @plant.photos.each_with_index do |photo, img_index| %>
+                      <div class="carousel-item <%= 'active' if img_index == 0 %>">
+                        <%= cl_image_tag photo.key, class: "d-block w-100 custom-carousel-image", crop: "pad", width: 750, height: 375, background: "auto", alt: @plant.name %>
                       </div>
-                        <p class="card-text text-muted"> <%= @plant.category %> </p>
-                        <p class="card-text">
-                            <%= @plant.description %>
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Owner">
-                            <div>
-                                <strong> <%= @plant.user.first_name %> </strong><br>
-                                <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
-                                <small><%= @plant.user.address %></small>
-                          </div>
-                        </div>
-                    </div>
+                    <% end %>
                   </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-            </div>
+                <!-- Fin du Carrousel -->
+                <div class="card-show">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <h5 class="card-title text-success"> <%= @plant.name %>
+                      </h5>
 
-            <!-- Right Content -->
-            <div class="col-md-4">
-                <div class="price-box">
-                    <h4> <% "#{@plant.price} par jour" %></h4>
-                      <div class="form-control-show">
-                        <div class="mb-3">
-                          <%= simple_form_for([@plant, @renting], html: {
-                            data: { controller: 'datepicker' }}) do |f| %>
-                              <%= f.input :start_date, as: :string,  input_html: { data: { datepicker_target: 'startDateInput'} } %>
-                              <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: 'endDateInput'} } %>
-                              <%= f.submit 'Book now!', class: 'btn btn-primary' %>
-                            <% end %>
+                          <% if @plant.user == @user %>
+                        <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
+                          <% end %>
+
+                    </div>
+                      <p class="card-text text-muted"> <%= @plant.category %> </p>
+                      <p class="card-text">
+                          <%= @plant.description %>
+                      </p>
+                      <div class="d-flex align-items-center">
+                          <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Owner">
+                          <div>
+                              <strong> <%= @plant.user.first_name %> </strong><br>
+                              <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
+                              <small><%= @plant.user.address %></small>
                         </div>
                       </div>
-                    <hr>
-                    <h4>Total <span class="float-end">54€</span></h4>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
+              </div>
+          </div>
+
+          <!-- Right Content -->
+          <div class="col-md-4">
+              <div class="price-box">
+                  <h4> <% "#{@plant.price} par jour" %></h4>
+                    <div class="form-control-show">
+                      <div class="mb-3">
+                        <%= simple_form_for([@plant, @renting], html: {
+                          data: { controller: 'datepicker' }}) do |f| %>
+                            <%= f.input :start_date, as: :string,  input_html: { data: { datepicker_target: 'startDateInput'} } %>
+                            <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: 'endDateInput'} } %>
+                            <%= f.submit 'Book now!', class: 'btn btn-primary' %>
+                          <% end %>
+                      </div>
+                    </div>
+                  <hr>
+                  <h4>Total <span class="float-end">54€</span></h4>
+              </div>
+          </div>
+      </div>
+  </div>
