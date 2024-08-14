@@ -5,7 +5,25 @@
             <!-- Left Content -->
             <div class="col-md-8">
                 <div class="card mb-3">
-                    <img src="https://via.placeholder.com/750x300" class="card-img-top" alt="...">
+                     <!-- Carrousel -->
+                  <div id="carouselExample<%= @plant.id %>" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <% @plant.photos.each_with_index do |photo, img_index| %>
+                        <div class="carousel-item <%= 'active' if img_index == 0 %>">
+                          <%= cl_image_tag photo.key, class: "d-block w-100 custom-carousel-image", crop: "pad", width: 750, height: 375, background: "auto", alt: @plant.name %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample<%= @plant.id %>" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                  <!-- Fin du Carrousel -->
                   <div class="card-show">
                     <div class="card-body">
                       <div class="d-flex justify-content-between">
@@ -34,7 +52,7 @@
             <div class="col-md-4">
                 <div class="price-box">
                     <h4> <% "#{@plant.price} par jour" %></h4>
-                      <div class="form_show">
+                      <div class="form-control-show">
                         <div class="mb-3">
                           <%= simple_form_for([@plant, @renting], html: {
                             data: { controller: 'datepicker' }}) do |f| %>
