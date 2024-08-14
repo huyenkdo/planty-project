@@ -16,7 +16,11 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(plants_params)
-    @plant.save
+    if @plant.save
+      redirect_to @plant, notice: "plant was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit

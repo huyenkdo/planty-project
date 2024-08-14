@@ -62,7 +62,9 @@
                           data: { controller: 'datepicker' }}) do |f| %>
                             <%= f.input :start_date, as: :string,  input_html: { data: { datepicker_target: 'startDateInput'} } %>
                             <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: 'endDateInput'} } %>
-                            <%= f.submit 'Book now!', class: 'btn btn-primary' %>
+                            <% if !@plant.user == @user %>
+                              <%= f.submit 'Book now!', class: 'btn btn-primary' %>
+                            <% end %>
                           <% end %>
                       </div>
                     </div>
