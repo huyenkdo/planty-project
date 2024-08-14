@@ -1,0 +1,19 @@
+<div class="mb-4 d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <nav class="navbar fixed-top">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <%= link_to plants_path do %>
+          <button class="navbar-brand-btn">Planty</button>
+        <% end %>
+        <div class="container-button d-flex align-items-center">
+          <%= link_to new_plant_path  do %>
+            <button class="create-btn"> Créer une annonce </button>
+          <% end %>
+          <%= link_to dashboard_path do %>
+            <button class="profil-btn"></button>
+          <% end%>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
