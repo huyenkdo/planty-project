@@ -2,7 +2,7 @@
   <h1 class="text-primary my-4">Dashboard</h1>
   <div class="card" style="background: #FEF6EF">
     <div class="d-flex">
-      <img src="<%= image_path('user_icon.png') %>" alt="default user photo" class="rounded m-2" style="width: 150px">
+      <%= cl_image_tag @user.photo.key, class: "rounded m-2", style: "width: 150px" %>
     </div>
   </div>
   <h2><%= @user.first_name %> <%= @user.last_name %></h2>
