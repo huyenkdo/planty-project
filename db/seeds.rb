@@ -7,7 +7,6 @@ puts "everything destroyed"
 User.destroy_all
 puts "everything destroyed"
 
-
 user1 = User.new(
   email: "exemple1@email.com",
   password: "exemple1",

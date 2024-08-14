@@ -32,9 +32,9 @@
     <div class="card-index">
       <div id="carouselExample<%= index + 1 %>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <% plant.images.each_with_index do |image, img_index| %>
+          <% plant.photos.each_with_index do |photo, img_index| %>
             <div class="carousel-item <%= 'active' if img_index == 0 %>">
-              <img src="<%= image.url %>" class="d-block w-100" alt="...">
+              <%= cl_image_tag photo.key, class: "d-block w-100" %>
             </div>
           <% end %>
         </div>
@@ -48,9 +48,9 @@
         </button>
       </div>
       <div class="card-index-body">
-        <h5 class="card-index-title"><%= plant.title %></h5>
-        <p class="card-index-text"><%= plant.content %></p>
-        <a href="<%= plant_path(plant) %>" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-index-title"><%= plant.name %></h5>
+        <p class="card-index-text"><%= plant.description %></p>
+        <a href="<%= plant_path(plant) %>" class="btn btn-primary"> Détails </a>
       </div>
     </div>
   <% end %>
