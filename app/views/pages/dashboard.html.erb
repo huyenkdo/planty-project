@@ -1,14 +1,17 @@
 <div class="container my-3">
   <h1 class="text-primary my-4">Dashboard</h1>
-  <div class="card" style="background: #FEF6EF">
+  <div class="card mb-4 py-2" style="background: #FEF6EF; border-radius: 10px">
     <div class="d-flex">
-      <%= cl_image_tag @user.photo.key, class: "rounded m-2", style: "width: 150px" %>
+      <%= cl_image_tag @user.photo.key, gravity: :face, class: "rounded-circle m-4 border border-secondary-subtle border-opacity-50 my-auto", style: "width: 140px; object-fit: cover; height: fit-content;" %>
+      <div class="card-body">
+        <h5 class="card-title fw-bold fs-3"><%= @user.first_name %> <%= @user.last_name %></h5>
+        <p class="card-text mb-1">Membre de Planty depuis <%= @user.created_at.year %></p>
+        <p class="card-text mb-1"><%= @user.address %></p>
+        <p class="card-text"><%= @user.email %></p>
+      </div>
     </div>
   </div>
-  <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-  <p>Membre de Planty depuis <%= @user.created_at.year %></p>
-  <p><%= @user.address %></p>
-  <p><%= @user.email %></p>
+
   <h2>Tes plantes</h2>
   <ul>
     <% @own_plants.each do |plant| %>
