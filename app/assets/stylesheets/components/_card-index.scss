@@ -9,15 +9,19 @@
 .card-index {
   flex: 1 1 calc(30% - 20px);
   width: 300px;
-  height: 800px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 }
 
 .card-index-img-top {
-  max-width: 100%;
+  width: 100%;
   height: 60%;
+}
+
+.good-image {
+  height: 300px;
+  object-fit: cover;
 }
 
 .card-index-body {
