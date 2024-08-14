@@ -7,7 +7,7 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     @renting = Renting.new
     @user = current_user
-    
+    @plant_user = @plant.user
   end
 
   def new
@@ -20,11 +20,12 @@ class PlantsController < ApplicationController
   end
 
   def edit
+    @plant = Plant.find(params[:id])
   end
 
   def update
+    @plant.update(plants_params)
   end
-
   def destroy
   end
 

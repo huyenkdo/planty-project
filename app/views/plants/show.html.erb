@@ -27,10 +27,14 @@
                   <div class="card-show">
                     <div class="card-body">
                       <div class="d-flex justify-content-between">
-                        <h5 class="card-title text-success"> <%= @plant.name %></h5>
-                        <%# <% if @plant.user == @user %> %>
-                           <button class="btn btn-primary"  type="button"> Edit</button>
-                      </div></h5>
+                        <h5 class="card-title text-success"> <%= @plant.name %>
+                        </h5>
+
+                            <% if @plant.user == @user %>
+                          <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
+                           <% end %>
+
+                      </div>
                         <p class="card-text text-muted"> <%= @plant.category %> </p>
                         <p class="card-text">
                             <%= @plant.description %>
