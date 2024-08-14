@@ -1,6 +1,7 @@
 class Plant < ApplicationRecord
   belongs_to :user
   has_many :rentings
+  has_many_attached :photos
 
   validates :name, presence: true
   validates :category, presence: true
