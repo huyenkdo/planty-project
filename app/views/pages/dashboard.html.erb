@@ -1,34 +1,86 @@
 <div class="container my-3">
   <h1 class="text-primary my-4">Dashboard</h1>
-  <div class="card" style="background: #FEF6EF">
+  <div class="card mb-4 py-2" style="background: #FEF6EF; border-radius: 10px; border-color: #8E5018">
     <div class="d-flex">
-      <%= cl_image_tag @user.photo.key, class: "rounded m-2", style: "width: 150px" %>
+      <%= cl_image_tag @user.photo.key, gravity: :face, class: "rounded-circle m-4 border border-secondary-subtle border-opacity-50 my-auto", style: "width: 140px; object-fit: cover; height: fit-content;" %>
+      <div class="card-body">
+        <h5 class="card-title fw-bold fs-3"><%= @user.first_name %> <%= @user.last_name %></h5>
+        <p class="card-text mb-1">Membre de Planty depuis <%= @user.created_at.year %></p>
+        <p class="card-text mb-1"><%= @user.address %></p>
+        <p class="card-text"><%= @user.email %></p>
+      </div>
     </div>
   </div>
-  <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-  <p>Membre de Planty depuis <%= @user.created_at.year %></p>
-  <p><%= @user.address %></p>
-  <p><%= @user.email %></p>
-  <h2>Tes plantes</h2>
-  <ul>
-    <% @own_plants.each do |plant| %>
-      <li><%= link_to plant.name, plant_path(plant) %></li>
-    <% end %>
-  </ul>
-  <h2>Demandes de location</h2>
-  <ul>
-    <% @own_plants.each do |plant| %>
-      <% requests = plant.rentings %>
-      <% requests.each do |request| %>
-        <li><%= request.status %> pour <%= plant.name %></li>
-      <% end %>
-    <% end %>
-  </ul>
-  <h2>Plantes louées</h2>
-  <ul>
-    <% @rentings.each do |renting| %>
-      <p><%= renting.plant.name %></p>
-      <p><%= renting.start_date.day %>/<%= renting.start_date.month %>/<%= renting.start_date.year %> - <%= renting.end_date.day %>/<%= renting.end_date.month %>/<%= renting.end_date.year %></p>
-    <% end %>
-  </ul>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow" style="border-radius: 10px">
+        <div class="card-body">
+          <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Tes plantes</h5>
+          <% @own_plants.each do |plant| %>
+            <div class="d-flex mt-4">
+              <%= cl_image_tag plant.photos.first.key, class: "rounded-circle m-4 my-auto", style: "width: 50px; object-fit: cover; height: 50px;" %>
+              <%= link_to plant.name, plant_path(plant), class: "text-dark text-decoration-none align-self-center" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card shadow" style="border-radius: 10px">
+        <div class="card-body">
+          <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Demandes de location</h5>
+          <% @own_plants.each do |plant| %>
+            <% requests = plant.rentings %>
+            <% requests.each do |request| %>
+              <div class="d-flex mt-4">
+                <% if request.status == 'Demande en attente' %>
+                  <i class="fa-solid fa-circle align-content-around" style="color: #EDD245"></i>
+                <% elsif request.status == 'Demande acceptée' %>
+                  <i class="fa-solid fa-circle align-content-around" style="color: #34CA55"></i>
+                <% else %>
+                  <i class="fa-solid fa-circle align-content-around" style="color: #CA5834"></i>
+                <% end %>
+                <p class="card-text ps-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><%= request.status %> pour <%= plant.name %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card shadow" style="border-radius: 10px">
+        <div class="card-body">
+          <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Plantes louées</h5>
+          <% @rentings.each do |renting| %>
+            <div class="d-flex border border-secondary-subtle py-2" style="border-radius: 10px">
+              <%= cl_image_tag renting.plant.photos.first.key, class: "rounded-circle m-4 my-auto", style: "width: 50px; object-fit: cover; height: 50px;" %>
+              <div>
+                <p class="m-0 fw-bold"><%= renting.plant.name %></p>
+                <p class="m-0"><%= renting.start_date.day %>/<%= renting.start_date.month %>/<%= renting.start_date.year %> - <%= renting.end_date.day %>/<%= renting.end_date.month %>/<%= renting.end_date.year %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="rentingRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
