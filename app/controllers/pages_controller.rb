@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     @user = current_user
     @own_plants = @user.plants
     @rentings = @user.rentings
+    
   end
 
   def accept

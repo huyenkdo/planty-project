@@ -1,5 +1,6 @@
 class PlantsController < ApplicationController
   def index
+    @plants = Plant.all
     if params[:query].present?
       @plants = Plant.search_by_name_category_description(params[:query])
     else
@@ -12,6 +13,15 @@ class PlantsController < ApplicationController
     @renting = Renting.new
     @user = current_user
     @plant_user = @plant.user
+    if @plant_user.latitude && @plant_user.longitude
+      @markers =
+        [{
+          lat: @plant_user.latitude,
+          lng: @plant_user.longitude
+        }]
+      else
+        @markers = []
+    end
   end
 
   def new
@@ -20,7 +30,11 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(plants_params)
-    @plant.save
+    if @plant.save
+      redirect_to @plant, notice: "plant was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
