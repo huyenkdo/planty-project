@@ -29,6 +29,7 @@ class PlantsController < ApplicationController
   def update
     @plant.update(plants_params)
   end
+
   def destroy
   end
 
