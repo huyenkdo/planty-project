@@ -1,14 +1,13 @@
 .container-card-index {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 20px;
   padding: 40px;
 }
 
 .card-index {
-  flex: 1 1 calc(30% - 20px);
-  width: 300px;
+  width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
