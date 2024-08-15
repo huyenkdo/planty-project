@@ -25,7 +25,7 @@
             <%= f.number_field :price, class: 'form-control' %>
           </div>
           <div class="mb-3">
-          <%= f.input :photo, as: :file %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           </div>
           <div class="text-center">
             <%= f.submit 'Créer', class: 'btn btn-primary' %>

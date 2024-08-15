@@ -24,7 +24,9 @@
             <%= f.label :price, class: 'form-label' %>
             <%= f.number_field :price, class: 'form-control' %>
           </div>
-
+          <div class="mb-3">
+            <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+          </div>
           <div class="text-center">
             <%= f.submit 'Mettre à jour', class: 'btn btn-primary' %>
           </div>

@@ -30,8 +30,9 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(plants_params)
+    @plant.user = current_user
     if @plant.save
-      redirect_to @plant, notice: "plant was successfully created."
+      redirect_to plant_path(@plant), notice: 'La plante a été créée avec succès.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,8 +43,14 @@ class PlantsController < ApplicationController
   end
 
   def update
-    @plant.update(plants_params)
+    @plant = Plant.find(params[:id])
+    if @plant.update(plants_params)
+      redirect_to @plant, notice: 'Annonce mise à jour avec succès.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
+
   def destroy
   end
 
