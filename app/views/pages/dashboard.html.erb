@@ -69,9 +69,10 @@
                         </div>
                       </div>
                       <div class="d-flex justify-content-center mb-4">
-                        <button type="button" class="btn me-5 rounded-pill" style="background: #F6CCCC;
-                                                                                  width: 120px;
-                                                                                  color: #CA5834">Refuser</button>
+                        <%= link_to "Refuser", controller: "pages", action: "deny", class: "btn me-5 rounded-pill",
+                                                                                        style: "background: #F6CCCC;
+                                                                                                width: 120px;
+                                                                                                color: #CA5834" %>
                         <button type="button" class="btn btn-primary ms-5 rounded-pill text-white" style="width: 120px">Accepter</button>
                       </div>
                     </div>

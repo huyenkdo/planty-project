@@ -10,8 +10,10 @@ class PagesController < ApplicationController
   end
 
   def accept
+    puts 'Accepted'
   end
 
   def deny
+    puts 'Denied'
   end
 end
