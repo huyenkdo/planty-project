@@ -1,6 +1,7 @@
 class PlantsController < ApplicationController
   def index
     @plants = Plant.all
+  # The `geocoded` scope filters only flats with coordinates
   end
 
   def show
@@ -8,6 +9,15 @@ class PlantsController < ApplicationController
     @renting = Renting.new
     @user = current_user
     @plant_user = @plant.user
+    if @plant_user.latitude && @plant_user.longitude
+      @markers =
+        [{
+          lat: @plant_user.latitude,
+          lng: @plant_user.longitude
+        }]
+      else
+        @markers = []
+    end
   end
 
   def new

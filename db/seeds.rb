@@ -13,7 +13,7 @@ user1 = User.new(
   username: Faker::Internet.unique.username,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  address: Faker::Address.full_address
+  address: "24 rue louis blanc, 75010 paris"
   )
 
 user1.photo.attach(
@@ -30,7 +30,7 @@ user2 = User.new(
   username: Faker::Internet.unique.username,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  address: Faker::Address.full_address
+  address: "16 villa gaudelet 75011 paris"
   )
 
 user2.photo.attach(
