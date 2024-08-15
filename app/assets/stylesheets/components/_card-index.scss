@@ -25,6 +25,7 @@
 
 .card-index-body {
   padding: 15px;
+  min-height: 132px;
 }
 
 .card-index-title {
@@ -32,9 +33,15 @@
   font-weight: 800;
 }
 
+
 .card-index-text {
   margin-bottom: 15px;
   font-size: small;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-primary {
@@ -45,6 +52,8 @@
   color: #fff;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  height: 42PX;
+  width: 125px;
 }
 
 .btn-primary:hover {
@@ -63,4 +72,15 @@
 @keyframes placeholderShimmer {
   0% { background-position: -468px 0; }
   100% { background-position: 468px 0; }
+}
+
+.card-index-price {
+  font-weight: 700;
+  font-size: medium;
+}
+
+.details-price-card-index {
+  margin-left: -20px;
+  margin-left: -6px;
+  padding-bottom: 13px;
 }
