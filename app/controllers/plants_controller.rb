@@ -3,7 +3,6 @@ class PlantsController < ApplicationController
     @plants = Plant.all
     if params[:filter].present?
       @plants = @plants.where(category: params[:filter])
-    end
   end
 
   def show
