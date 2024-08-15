@@ -39,7 +39,7 @@
                       <h5 class="card-title text-success"> <%= @plant.name %>
                       </h5>
                           <% if @plant.user == @user %>
-                        <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
+                        <%= link_to 'Modifier', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
                           <% end %>
                     </div>
                       <p class="card-text text-muted"> <%= @plant.category %> </p>
