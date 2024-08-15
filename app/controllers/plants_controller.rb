@@ -1,7 +1,11 @@
 class PlantsController < ApplicationController
   def index
     @plants = Plant.all
-  # The `geocoded` scope filters only flats with coordinates
+    if params[:query].present?
+      @plants = Plant.search_by_name_category_description(params[:query])
+    else
+      @plants = Plant.all
+    end
   end
 
   def show
