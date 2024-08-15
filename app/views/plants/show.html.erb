@@ -1,5 +1,14 @@
 
 <div class="container mt-5" style="margin-top: 63px">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <h1><%= @plant.name %></h1>
       <div class="row">
           <!-- Left Content -->
