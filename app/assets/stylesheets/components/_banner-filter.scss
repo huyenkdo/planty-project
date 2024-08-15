@@ -1,0 +1,75 @@
+.banner-filter {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.filter-btn1 {
+  background-image: url('./logo-searchbar1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn2 {
+  background-image: url('./logo-searchbar2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn3 {
+  background-image: url('./logo-searchbar3.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn4 {
+  background-image: url('./logo-searchbar4.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn5 {
+  background-image: url('./logo-searchbar5.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn6 {
+  background-image: url('./logo-searchbar6.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+}
+
+.filter-btn:focus {
+  outline: none;
+}

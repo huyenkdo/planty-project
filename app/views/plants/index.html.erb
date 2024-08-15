@@ -1,14 +1,27 @@
 
 <div class="container-banner">
   <div class="banner">
-      <nav class="searchbar-index d-flex justify-content-center align-items-center position-relative">
-        <div class="input-wrapper position-relative">
-          <input type="text" class="form-control-index" placeholder="Find the plant you need!">
-          <button class="clear-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none;">x
-          </button>
-        </div>
-      </nav>
-    </div>
+    <nav class="searchbar-index d-flex justify-content-center align-items-center position-relative">
+      <div class="input-wrapper position-relative">
+        <%= form_tag plants_path, method: :get, class: "form-inline" do %>
+          <%= text_field_tag :query, params[:query], class: "form-control-index", placeholder: "Trouvez votre plante !" %>
+          <button class="clear-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none;">x</button>
+        <% end %>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container-filter">
+  <div class="banner-filter container-fluid d-flex align-items-center">
+      <button class="filter-btn1" data-filter="indoor"></button>
+      <button class="filter-btn2" data-filter="outdoor"></button>
+      <button class="filter-btn3" data-filter="tropical"></button>
+      <button class="filter-btn4" data-filter="tropical"></button>
+      <button class="filter-btn5" data-filter="tropical"></button>
+      <button class="filter-btn6" data-filter="tropical"></button>
+
+  </div>
 </div>
 
 <div class="container-card-index">
