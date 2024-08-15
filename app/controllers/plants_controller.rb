@@ -11,6 +11,15 @@ class PlantsController < ApplicationController
     @renting = Renting.new
     @user = current_user
     @plant_user = @plant.user
+    if @plant_user.latitude && @plant_user.longitude
+      @markers =
+        [{
+          lat: @plant_user.latitude,
+          lng: @plant_user.longitude
+        }]
+      else
+        @markers = []
+    end
   end
 
   def new
@@ -19,7 +28,12 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(plants_params)
-    @plant.save
+    @plant.user = current_user
+    if @plant.save
+      redirect_to plant_path(@plant), notice: 'La plante a été créée avec succès.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -27,7 +41,12 @@ class PlantsController < ApplicationController
   end
 
   def update
-    @plant.update(plants_params)
+    @plant = Plant.find(params[:id])
+    if @plant.update(plants_params)
+      redirect_to @plant, notice: 'Annonce mise à jour avec succès.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

@@ -35,12 +35,49 @@
               <div class="d-flex mt-4">
                 <% if request.status == 'Demande en attente' %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #EDD245"></i>
+                  <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestPending" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
                 <% elsif request.status == 'Demande acceptée' %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #34CA55"></i>
+                  <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestAccepted" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
                 <% else %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #CA5834"></i>
+                  <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestRefused" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
                 <% end %>
-                <p class="card-text ps-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><%= request.status %> pour <%= plant.name %></p>
+                <!-- Modal Pending -->
+                <div class="modal fade" id="rentingRequestPending" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content px-3">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-4 fw-bold text-primary" id="modalTitle"><%= request.status %> pour <%= plant.name %></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="d-flex border border-secondary-subtle py-3" style="border-radius: 10px">
+                          <%= cl_image_tag request.user.photo.key, gravity: :face, class: "rounded-circle m-4 border border-secondary-subtle border-opacity-50 my-auto", style: "width: 100px; object-fit: cover; height: 100px;" %>
+                          <div class="div">
+                            <p class="fs-3 m-0 text-dark-emphasis"><%= request.user.first_name %> <%= request.user.last_name %></p>
+                            <p class="fst-italic m-0">Je veux louer ta plante</p>
+                            <div class="d-flex">
+                              <p class="fw-bold m-0 pe-2">Date de début :</p>
+                              <p class="m-0"><%= request.start_date.day %>/<%= request.start_date.month %>/<%= request.start_date.year %></p>
+                            </div>
+                            <div class="d-flex">
+                              <p class="fw-bold m-0 pe-2">Date de fin :</p>
+                              <p class="m-0"><%= request.end_date.day %>/<%= request.end_date.month %>/<%= request.end_date.year %></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center mb-4">
+                        <%= link_to "Refuser", controller: "pages", action: "deny", class: "btn me-5 rounded-pill",
+                                                                                        style: "background: #F6CCCC;
+                                                                                                width: 120px;
+                                                                                                color: #CA5834" %>
+                        <button type="button" class="btn btn-primary ms-5 rounded-pill text-white" style="width: 120px">Accepter</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             <% end %>
           <% end %>
@@ -60,25 +97,6 @@
               </div>
             </div>
           <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="rentingRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
