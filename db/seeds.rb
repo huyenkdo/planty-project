@@ -15,7 +15,7 @@ user1 = User.new(
   username: Faker::Internet.unique.username,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  address: Faker::Address.full_address
+  address: "24 rue louis blanc, 75010 paris"
   )
 
 user1.photo.attach(
@@ -32,7 +32,7 @@ user2 = User.new(
   username: Faker::Internet.unique.username,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
-  address: Faker::Address.full_address
+  address: "16 villa gaudelet 75011 paris"
   )
 
 user2.photo.attach(
@@ -107,7 +107,7 @@ renting1 = Renting.create!(
   start_date: Date.today,
   end_date: Date.today + 7.days,
   status: "Demande acceptée",
-  plant_id: Plant.all.first.id,
+  plant_id: Plant.where.not(user_id: user2.id).sample.id,
   user_id: user2.id
 )
 
@@ -115,7 +115,7 @@ renting2 = Renting.create!(
   start_date: Date.today + 1.day,
   end_date: Date.today + 10.days,
   status: "Demande en attente",
-  plant_id: Plant.all.last.id,
+  plant_id: Plant.where.not(user_id: user1.id).sample.id,
   user_id: user1.id
 )
 puts "#{Renting.count} rentings created!"
