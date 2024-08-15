@@ -1,10 +1,8 @@
 class PlantsController < ApplicationController
   def index
     @plants = Plant.all
-    if params[:query].present?
-      @plants = Plant.search_by_name_category_description(params[:query])
-    else
-      @plants = Plant.all
+    if params[:filter].present?
+      @plants = @plants.where(category: params[:filter])
     end
   end
 

@@ -14,14 +14,33 @@
 
 <div class="container-filter">
   <div class="banner-filter container-fluid d-flex align-items-center">
-      <button class="filter-btn filter-btn1" data-filter="purificateur"></button>
-      <button class="filter-btn filter-btn2" data-filter="humidificateur"></button>
-      <button class="filter-btn filter-btn3" data-filter="remonte_l_humeur"></button>
-      <button class="filter-btn filter-btn4" data-filter="dehumidificateur"></button>
-      <button class="filter-btn filter-btn5" data-filter="tropical"></button>
-      <button class="filter-btn filter-btn6" data-filter="tropical"></button>
+    <%= link_to plants_path(filter: "Purificateur"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn1"></button>
+      <p class="filter-text">Purificateur</p>
+    <% end %>
+    <%= link_to plants_path(filter: "Humidificateur"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn2"></button>
+      <p class="filter-text">Humidificateur</p>
+    <% end %>
+    <%= link_to plants_path(filter: "Déhumidificateur"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn3"></button>
+      <p class="filter-text">Déhumidificateur</p>
+    <% end %>
+    <%= link_to plants_path(filter: "Remonte l'humeur"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn4"></button>
+      <p class="filter-text">Remonte l'humeur</p>
+    <% end %>
+    <%= link_to plants_path(filter: "Tropical"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn5"></button>
+      <p class="filter-text">Tropical</p>
+    <% end %>
+    <%= link_to plants_path(filter: "Tropical"), class: "filter-link" do %>
+      <button class="filter-btn filter-btn6"></button>
+      <p class="filter-text"> Grasse </p>
+    <% end %>
   </div>
 </div>
+
 
 <div class="container-card-index">
   <% @plants.each_with_index do |plant, index| %>
