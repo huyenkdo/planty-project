@@ -1,4 +1,13 @@
 <div class="container" style ="margin-top: 63px">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <h1 class="text-center my-4">Créer une nouvelle annonce</h1>
   <div class="row justify-content-center">
     <div class="col-md-8">

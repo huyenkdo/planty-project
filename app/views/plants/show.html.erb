@@ -47,11 +47,11 @@
                           <%= @plant.description %>
                       </p>
                       <div class="d-flex align-items-center">
-                          <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Owner">
-                          <div>
-                              <strong> <%= @plant.user.first_name %> </strong><br>
-                              <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
-                              <small><%= @plant.user.address %></small>
+                        <%= image_tag @plant.user.photo.variant(resize_to_fill: [50, 50]), class: "rounded-circle me-2", alt: "Owner" %>
+                        <div>
+                          <strong> <%= @plant.user.first_name %> </strong><br>
+                          <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
+                          <small><%= @plant.user.address %></small>
                         </div>
                       </div>
                   </div>
