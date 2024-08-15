@@ -1,7 +1,6 @@
 class PlantsController < ApplicationController
   def index
     @plants = Plant.all
-  # The `geocoded` scope filters only flats with coordinates
   end
 
   def show
