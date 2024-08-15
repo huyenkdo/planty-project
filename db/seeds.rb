@@ -1,4 +1,6 @@
 require 'faker'
+require "open-uri"
+require "nokogiri"
 
 Renting.destroy_all
 puts "everything destroyed"
@@ -43,58 +45,61 @@ user2.save
 
 puts "#{User.count} users created!"
 
-plants_data = [
-  {
-    name: "Ficus Benjamina",
-    category: "Indoor",
-    description: "A popular houseplant with elegant drooping branches and glossy leaves.",
-    price: 25,
-    user_id: user1.id,
-    photo1: "https://media.gerbeaud.net/2023/08/640/ficus-benjamina.jpg",
-    photo2: "https://cdn.webshopapp.com/shops/30495/files/448468219/ficus-benjamina-danielle-plante-dappartement-pot-2.jpg",
-    file_name: "ficus-benjamina"
-  },
-  {
-    name: "Monstera Deliciosa",
-    category: "Indoor",
-    description: "Known for its large, split leaves, this plant adds a tropical touch to any room.",
-    price: 40,
-    user_id: user2.id,
-    photo1: "https://imgix.be.green/63871aa39676b587083168.jpg\?auto\=compress",
-    photo2: "https://cdn.webshopapp.com/shops/30495/files/447582333/monstera-deliciosa-hauteur-70-80cm-plante-gruyere.jpg",
-    file_name: "monstera"
-  },
-  {
-    name: "Lavender",
-    category: "Outdoor",
-    description: "A fragrant herb with calming properties, perfect for gardens and patios.",
-    price: 15,
-    user_id: user2.id,
-    photo1: "https://celebratedherb.com/wp-content/uploads/2024/06/lavender_planter.jpeg",
-    photo2: "https://www.datocms-assets.com/33130/1615324347-lavenderpottedherbs.jpg\?h\=500",
-    file_name: "lavender"
-  }
-]
+url = "https://plnts.com/fr/shop/all-plnts/size:l,m,xl,xxl?sort=price-desc"
+html_file = URI.open(url).read
+html_doc = Nokogiri::HTML.parse(html_file)
 
-plants_data.each do |plant_data|
+plants = html_doc.search("span.m-0.truncate.font-sans.text-sm.font-bold.leading-tight.\\33xl\\:text-base").map do |element|
   plant = Plant.new
-  plant.name = plant_data[:name]
-  plant.category = plant_data[:category]
-  plant.description = plant_data[:description]
-  plant.price = plant_data[:price]
-  plant.user_id = plant_data[:user_id]
-  plant.photos.attach(
-    io: URI.open(plant_data[:photo1]),
-    filename: "#{plant_data[:file_name]}.jpg",
-    content_type: 'image/jpg'
-  )
-  plant.photos.attach(
-    io: URI.open(plant_data[:photo2]),
-    filename: "#{plant_data[:file_name]}2.jpg",
-    content_type: 'image/jpg'
-  )
-  plant.save
+  plant.name = element.text
+  plant
 end
+
+plants.each_index do |index|
+  plants[index].price = html_doc.search("span.flex.flex-row.items-center.gap-2.mt-1.text-sm.leading-tight.\\33xl\\:text-base > span")[index]
+                                .text.delete("€").to_f
+end
+
+details_urls = html_doc.search(".group.relative.flex.flex-col.justify-start").map do |element|
+  "https://plnts.com#{element.attribute('href').value}"
+end
+
+plants.each_index do |index|
+  details_html_file = URI.open(details_urls[index]).read
+  details_html_doc = Nokogiri::HTML.parse(details_html_file)
+  if details_html_doc.search("p > span").blank?
+    plants[index].description = details_html_doc.search("p").first.text
+  else
+    plants[index].description = details_html_doc.search("p > span").text
+  end
+end
+
+categories = ["Purificateur", "Déhumidificateur", "Humidificateur", "Remonte l'humeur"]
+
+plants.each do |plant|
+  plant.category = categories.sample
+  plant.user_id = User.all.sample.id
+end
+
+plants.each_index do |index|
+  details_html_file = URI.open(details_urls[index]).read
+  details_html_doc = Nokogiri::HTML.parse(details_html_file)
+  photo_file_name = plants[index].name.delete(" ")
+  photo1_url = details_html_doc.search("div.overflow-hidden.absolute.inset-0 img").first.attribute('src').value
+  plants[index].photos.attach(
+    io: URI.open("https://plnts.com#{photo1_url}"),
+    filename: "#{photo_file_name}.jpg",
+    content_type: 'image/jpg'
+  )
+  photo2_url = details_html_doc.search("div.overflow-hidden.absolute.inset-0 img").last.attribute('src').value
+  plants[index].photos.attach(
+    io: URI.open("https://plnts.com#{photo2_url}"),
+    filename: "#{photo_file_name}2.jpg",
+    content_type: 'image/jpg'
+  )
+end
+
+plants.each(&:save!)
 
 puts "#{Plant.count} plants created!"
 
@@ -102,7 +107,7 @@ renting1 = Renting.create!(
   start_date: Date.today,
   end_date: Date.today + 7.days,
   status: "Demande acceptée",
-  plant_id: Plant.find_by(name: "Ficus Benjamina").id,
+  plant_id: Plant.all.first.id,
   user_id: user2.id
 )
 
@@ -110,7 +115,7 @@ renting2 = Renting.create!(
   start_date: Date.today + 1.day,
   end_date: Date.today + 10.days,
   status: "Demande en attente",
-  plant_id: Plant.find_by(name: "Monstera Deliciosa").id,
+  plant_id: Plant.all.last.id,
   user_id: user1.id
 )
 puts "#{Renting.count} rentings created!"
