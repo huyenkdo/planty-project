@@ -29,7 +29,6 @@
                     <div class="d-flex justify-content-between">
                       <h5 class="card-title text-success"> <%= @plant.name %>
                       </h5>
-
                           <% if @plant.user == @user %>
                         <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
                           <% end %>
@@ -51,26 +50,48 @@
                 </div>
               </div>
           </div>
-
-          <!-- Right Content -->
           <div class="col-md-4">
-              <div class="price-box">
-                  <h4> <% "#{@plant.price} par jour" %></h4>
-                    <div class="form-control-show">
-                      <div class="mb-3">
-                        <%= simple_form_for([@plant, @renting], html: {
-                          data: { controller: 'datepicker' }}) do |f| %>
-                            <%= f.input :start_date, as: :string,  input_html: { data: { datepicker_target: 'startDateInput'} } %>
-                            <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: 'endDateInput'} } %>
-                            <% if !@plant.user == @user %>
-                              <%= f.submit 'Book now!', class: 'btn btn-primary' %>
-                            <% end %>
-                          <% end %>
-                      </div>
-                    </div>
-                  <hr>
-                  <h4>Total <span class="float-end">54€</span></h4>
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-success"><%= (@plant.price) %>€ par jour</h4>
               </div>
+              <div class="form-group" data-controller="dynamic-booking-price" data-dynamic-booking-price-price-value="<%= @plant.price %>">
+                <%= simple_form_for([@plant, @renting], html: { data: { controller: 'datepicker' } }) do |f| %>
+                  <div class="mb-3">
+                    <%= f.input :start_date, as: :string, label: "Date de début :", input_html: {
+                      class: "form-control text-center",
+                      data: {
+                        datepicker_target: 'startDateInput',
+                        dynamic_booking_price_target: 'startDateInput',
+                        action: 'change->dynamic-booking-price#updatePrice'
+                      }
+                    } %>
+                  </div>
+                  <div class="mb-3">
+                    <%= f.input :end_date, as: :string, label: "Date de fin :", input_html: {
+                      class: "form-control text-center",
+                      data: {
+                        datepicker_target: 'endDateInput',
+                        dynamic_booking_price_target: 'endDateInput',
+                        action: 'change->dynamic-booking-price#updatePrice'
+                      }
+                    } %>
+                  </div>
+                  <% if @plant.user != @user %>
+                    <div class="d-grid">
+                      <%= f.submit 'Réserver', class: 'btn btn-success btn-lg mb-3' %>
+                    </div>
+                  <% end %>
+                  <hr>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5>Total</h5>
+                    <h4><span data-dynamic-booking-price-target="priceHolder"><%=(@plant.price) %>€</span></h4>
+                  </div>
+
+                <% end %>
+              </div>
+            </div>
           </div>
+
       </div>
   </div>
