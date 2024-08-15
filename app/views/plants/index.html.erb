@@ -14,13 +14,12 @@
 
 <div class="container-filter">
   <div class="banner-filter container-fluid d-flex align-items-center">
-      <button class="filter-btn1" data-filter="indoor"></button>
-      <button class="filter-btn2" data-filter="outdoor"></button>
-      <button class="filter-btn3" data-filter="tropical"></button>
-      <button class="filter-btn4" data-filter="tropical"></button>
-      <button class="filter-btn5" data-filter="tropical"></button>
-      <button class="filter-btn6" data-filter="tropical"></button>
-
+      <button class="filter-btn filter-btn1" data-filter="purificateur"></button>
+      <button class="filter-btn filter-btn2" data-filter="humidificateur"></button>
+      <button class="filter-btn filter-btn3" data-filter="remonte_l_humeur"></button>
+      <button class="filter-btn filter-btn4" data-filter="dehumidificateur"></button>
+      <button class="filter-btn filter-btn5" data-filter="tropical"></button>
+      <button class="filter-btn filter-btn6" data-filter="tropical"></button>
   </div>
 </div>
 
@@ -44,10 +43,13 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="card-index-body">
+     <div class="card-index-body">
         <h5 class="card-index-title"><%= plant.name %></h5>
         <p class="card-index-text"><%= plant.description %></p>
-        <a href="<%= plant_path(plant) %>" class="btn btn-primary"> Détails </a>
+      </div>
+      <div class="details-price-card-index container-fluid d-flex align-items-end justify-content-between">
+        <a href="<%= plant_path(plant) %>" class="btn btn-primary mb-1">Détails</a>
+        <p class="card-index-price mb-0"><%= plant.price %>€ / par jour</p>
       </div>
     </div>
   <% end %>

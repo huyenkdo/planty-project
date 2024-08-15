@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :plants do
     resources :rentings, only: [:create]
   end
+  resources :rentings, only: [:show, :destroy]
   get "/dashboard", to: "pages#dashboard", as: "dashboard"
   patch "/rentings/:id", to: "rentings#accept"
   patch "/rentings/:id", to: "rentings#deny"
