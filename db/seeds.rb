@@ -24,6 +24,8 @@ user1.photo.attach(
   content_type: 'image/jpg'
 )
 
+sleep(4)
+
 user1.save
 
 user2 = User.new(
@@ -40,6 +42,8 @@ user2.photo.attach(
   filename: "avatar-meryem.jpg",
   content_type: 'image/jpg'
 )
+
+sleep(4)
 
 user2.save
 
