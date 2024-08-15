@@ -8,12 +8,4 @@ class PagesController < ApplicationController
     @own_plants = @user.plants
     @rentings = @user.rentings
   end
-
-  def accept
-    puts 'Accepted'
-  end
-
-  def deny
-    puts 'Denied'
-  end
 end
