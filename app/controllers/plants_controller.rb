@@ -57,7 +57,7 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
     if @plant.update(plants_params)
-      redirect_to @plant, notice: 'Annonce mise à jour avec succès.'
+      redirect_to plant_path(@plant), notice: 'Annonce mise à jour avec succès.'
     else
       render :edit, status: :unprocessable_entity
     end
