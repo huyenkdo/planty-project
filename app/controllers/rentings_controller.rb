@@ -15,7 +15,6 @@ class RentingsController < ApplicationController
     end
   end
 
-
   def accept
     if @renting.update!(status: 'Demande acceptée')
       redirect_to dashboard_path, notice: 'La demande a été acceptée'
