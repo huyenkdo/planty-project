@@ -1,7 +1,7 @@
 class Renting < ApplicationRecord
   belongs_to :plant
   belongs_to :user
-  after_initialize :init
+  # after_initialize :init
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -9,9 +9,9 @@ class Renting < ApplicationRecord
   validate :end_date_cannot_be_before_start_date
   validates :status, presence: true, inclusion: { in: ['Demande en attente', 'Demande acceptée', 'Demande refusée'] }
 
-  def init
-    self.status = "Demande en attente"
-  end
+  # def init
+  #   self.status = "Demande en attente"
+  # end
 
   def start_date_cannot_be_in_the_past
     errors.add(:start_date, "ne peut pas être dans le passé") if

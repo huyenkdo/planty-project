@@ -6,6 +6,7 @@ class RentingsController < ApplicationController
     @renting.user = current_user
     plant = Plant.find(params[:plant_id])
     @renting.plant = plant
+    @renting.status = 'Demande en attente'
 
     if @renting.save
       redirect_to plant_path(plant), notice: "Votre demande de réservation a été envoyée avec succès."
@@ -14,11 +15,6 @@ class RentingsController < ApplicationController
     end
   end
 
-  private
-
-  def renting_params
-    params.require(:renting).permit(:start_date, :end_date)
-  end
 
   def accept
     if @renting.update!(status: 'Demande acceptée')
@@ -29,7 +25,8 @@ class RentingsController < ApplicationController
   end
 
   def deny
-    if @renting.update(status: 'Demande refusée')
+
+    if @renting.update!(status: 'Demande refusée')
       redirect_to dashboard_path, notice: 'La demande a été refusée'
     else
       redirect_to dashboard_path, alert: 'Il y a eu une erreur'
@@ -37,6 +34,10 @@ class RentingsController < ApplicationController
   end
 
   private
+
+  def renting_params
+    params.require(:renting).permit(:start_date, :end_date)
+  end
 
   def set_renting
     @renting = Renting.find(params[:id])
