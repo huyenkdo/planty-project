@@ -1,4 +1,3 @@
-
 <div class="container-banner">
   <div class="banner">
     <nav class="searchbar-index d-flex justify-content-center align-items-center position-relative">
@@ -14,29 +13,40 @@
 
 <div class="container-filter">
   <div class="banner-filter container-fluid d-flex align-items-center">
-    <%= link_to plants_path(filter: "Purificateur"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn1"></button>
+    <%= link_to plants_path(filter: params[:filter] == "Purificateur" ? nil : "Purificateur", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn1 <%= 'active' if params[:filter] == 'Purificateur' %>"></button>
       <p class="filter-text">Purificateur</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == 'Purificateur'}" %>
     <% end %>
-    <%= link_to plants_path(filter: "Humidificateur"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn2"></button>
+
+    <%= link_to plants_path(filter: params[:filter] == "Humidificateur" ? nil : "Humidificateur", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn2 <%= 'active' if params[:filter] == 'Humidificateur' %>"></button>
       <p class="filter-text">Humidificateur</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == 'Humidificateur'}" %>
     <% end %>
-    <%= link_to plants_path(filter: "Déhumidificateur"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn3"></button>
+
+    <%= link_to plants_path(filter: params[:filter] == "Déhumidificateur" ? nil : "Déhumidificateur", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn3 <%= 'active' if params[:filter] == 'Déhumidificateur' %>"></button>
       <p class="filter-text">Déhumidificateur</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == 'Déhumidificateur'}" %>
     <% end %>
-    <%= link_to plants_path(filter: "Remonte l'humeur"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn4"></button>
+
+    <%= link_to plants_path(filter: params[:filter] == "Remonte l'humeur" ? nil : "Remonte l'humeur", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn4 <%= 'active' if params[:filter] == "Remonte l'humeur" %>"></button>
       <p class="filter-text">Remonte l'humeur</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == "Remonte l'humeur"}" %>
     <% end %>
-    <%= link_to plants_path(filter: "Tropical"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn5"></button>
+
+    <%= link_to plants_path(filter: params[:filter] == "Tropical" ? nil : "Tropical", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn5 <%= 'active' if params[:filter] == 'Tropical' %>"></button>
       <p class="filter-text">Tropical</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == 'Tropical'}" %>
     <% end %>
-    <%= link_to plants_path(filter: "Tropical"), class: "filter-link" do %>
-      <button class="filter-btn filter-btn6"></button>
-      <p class="filter-text"> Grasse </p>
+
+    <%= link_to plants_path(filter: params[:filter] == "Grasse" ? nil : "Grasse", query: params[:query]), class: "filter-link" do %>
+      <button class="filter-btn filter-btn6 <%= 'active' if params[:filter] == 'Grasse' %>"></button>
+      <p class="filter-text">Grasse</p>
+      <%= content_tag :div, '', class: "filter-bar #{'active-bar' if params[:filter] == 'Grasse'}" %>
     <% end %>
   </div>
 </div>
@@ -62,7 +72,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-     <div class="card-index-body">
+      <div class="card-index-body">
         <h5 class="card-index-title"><%= plant.name %></h5>
         <p class="card-index-text"><%= plant.description %></p>
       </div>
@@ -71,5 +81,13 @@
         <p class="card-index-price mb-0"><%= plant.price %>€ / par jour</p>
       </div>
     </div>
+  <% end %>
+</div>
+
+<div class="pagination-index d-flex justify-content-center align-items-center">
+  <% (1..@total_pages).each do |page| %>
+    <a href="<%= plants_path(page: page, filter: params[:filter]) %>" class="pagination-index-link <%= 'active' if page == @page %>">
+      <%= page %>
+    </a>
   <% end %>
 </div>
