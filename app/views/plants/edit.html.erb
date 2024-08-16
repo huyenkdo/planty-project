@@ -6,22 +6,22 @@
         <%= simple_form_for(@plant) do |f| %>
 
           <div class="mb-3">
-            <%= f.label :name, class: 'form-label' %>
+            <%= f.label 'Nom :', class: 'form-label' %>
             <%= f.text_field :name, class: 'form-control' %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :category, class: 'form-label' %>
+            <%= f.label 'Catégorie :', class: 'form-label' %>
             <%= f.text_field :category, class: 'form-control' %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :description, class: 'form-label' %>
+            <%= f.label 'Description :', class: 'form-label' %>
             <%= f.text_field :description, class: 'form-control' %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :price, class: 'form-label' %>
+            <%= f.label 'Prix :', class: 'form-label' %>
             <%= f.number_field :price, class: 'form-control' %>
           </div>
           <div class="mb-3">

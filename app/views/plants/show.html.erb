@@ -1,5 +1,14 @@
 
 <div class="container mt-5" style="margin-top: 63px">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <h1><%= @plant.name %></h1>
       <div class="row">
           <!-- Left Content -->
@@ -30,7 +39,7 @@
                       <h5 class="card-title text-success"> <%= @plant.name %>
                       </h5>
                           <% if @plant.user == @user %>
-                        <%= link_to 'EDIT', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
+                        <%= link_to 'Modifier', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
                           <% end %>
                     </div>
                       <p class="card-text text-muted"> <%= @plant.category %> </p>
@@ -38,11 +47,11 @@
                           <%= @plant.description %>
                       </p>
                       <div class="d-flex align-items-center">
-                          <img src="https://via.placeholder.com/50" class="rounded-circle me-2" alt="Owner">
-                          <div>
-                              <strong> <%= @plant.user.first_name %> </strong><br>
-                              <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
-                              <small><%= @plant.user.address %></small>
+                        <%= cl_image_tag @plant.user.photo.key, gravity: :face, class: "rounded-circle m-4 border border-secondary-subtle border-opacity-50 my-auto", style: "width: 80px; object-fit: cover; height: 80px;" %>
+                        <div>
+                          <strong> <%= @plant.user.first_name %> </strong><br>
+                          <small>Membre de Planty depuis <%= @plant.user.created_at.year %></small><br>
+                          <small><%= @plant.user.address %></small>
                         </div>
                       </div>
                   </div>
