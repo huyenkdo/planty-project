@@ -54,6 +54,7 @@
 
 <div class="container-card-index">
   <% @plants.each_with_index do |plant, index| %>
+    <%= link_to plant_path(plant), class:"text-decoration-none" do %>
     <div class="card-index">
       <div id="carouselExample<%= index + 1 %>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -74,8 +75,9 @@
       </div>
       <div class="card-index-body">
         <h5 class="card-index-title"><%= plant.name %></h5>
-        <p class="card-index-text"><%= plant.description %></p>
+        <p class="card-index-text text-dark"><%= plant.description %></p>
       </div>
+    <% end %>
       <div class="details-price-card-index container-fluid d-flex align-items-end justify-content-between">
         <a href="<%= plant_path(plant) %>" class="btn btn-primary mb-1">Détails</a>
         <p class="card-index-price mb-0"><%= plant.price %>€ / par jour</p>
