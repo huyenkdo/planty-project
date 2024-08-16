@@ -13,3 +13,10 @@
   margin: 20px;
   font-weight: 600;
 }
+
+.pagination-index-link.active {
+  font-size: 20px;
+  font-weight: 700;
+  color: #013801;
+  border-bottom: 2px solid #013901;
+}
