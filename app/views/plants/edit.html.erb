@@ -1,5 +1,5 @@
 <div class="container" style ="margin-top: 84px">
-  <h1 class="text-center my-4">Modifier l'article</h1>
+  <h1 class="text-center my-4 text-primary">Modifier l'article</h1>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card p-4">
@@ -28,7 +28,7 @@
             <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           </div>
           <div class="text-center">
-            <%= f.button :submit, "Mettre à jour", class: "btn btn-primary" %>
+            <%= f.button :submit, "Mettre à jour", class: "btn btn-primary p-0" %>
           </div>
 
         <% end %>

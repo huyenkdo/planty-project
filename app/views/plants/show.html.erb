@@ -1,5 +1,5 @@
 
-<div class="container" style="margin-top: 63px">
+<div class="container" style="margin-top: 84px">
   <% if flash[:notice] %>
     <div class="alert alert-success">
       <%= flash[:notice] %>
@@ -9,7 +9,6 @@
       <%= flash[:alert] %>
     </div>
   <% end %>
-  <h1><%= @plant.name %></h1>
       <div class="row">
           <!-- Left Content -->
           <div class="col-md-8">
@@ -36,17 +35,17 @@
                 <div class="card-show">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
-                      <h5 class="card-title text-success"> <%= @plant.name %>
+                      <h5 class="card-title text-primary fs-1 fw-bold"> <%= @plant.name %>
                       </h5>
                           <% if @plant.user == @user %>
                         <%= link_to 'Modifier', edit_plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
                           <% end %>
                     </div>
-                      <p class="card-text text-muted"> <%= @plant.category %> </p>
+                      <p class="card-text text-muted fst-italic"> <%= @plant.category %> </p>
                       <p class="card-text">
                           <%= @plant.description %>
                       </p>
-                      <div class="d-flex align-items-center">
+                      <div class="d-flex align-items-center border mt-2 p-2" style="border-radius: 10px;">
                         <%= cl_image_tag @plant.user.photo.key, gravity: :face, class: "rounded-circle m-4 border border-secondary-subtle border-opacity-50 my-auto", style: "width: 80px; object-fit: cover; height: 80px;" %>
                         <div>
                           <strong> <%= @plant.user.first_name %> </strong><br>
@@ -74,7 +73,7 @@
   <!-- Card pour le calendrier -->
   <div class="card shadow-sm p-3 mt-5 bg-white rounded">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="text-success"><%= (@plant.price) %>€ par jour</h4>
+      <h4 class="text-primary fw-bold"><%= (@plant.price) %>€ par jour</h4>
     </div>
     <div class="form-group" data-controller="dynamic-booking-price" data-dynamic-booking-price-price-value="<%= @plant.price %>">
       <%= simple_form_for([@plant, @renting], html: { data: { controller: 'datepicker' } }) do |f| %>
@@ -100,7 +99,7 @@
         </div>
         <% if @plant.user != @user %>
           <div class="d-grid">
-            <%= f.submit 'Réserver', class: 'btn btn-primary btn-lg mb-2' %>
+            <%= f.submit 'Réserver', class: 'btn btn-primary btn-lg mb-2 p-0' %>
           </div>
         <% end %>
         <hr>
