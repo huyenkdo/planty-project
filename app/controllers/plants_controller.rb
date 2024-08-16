@@ -2,9 +2,22 @@ class PlantsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
     @plants = Plant.all
+
+    if params[:query].present?
+      @plants = Plant.search_by_name_category_description(params[:query])
+    else
+      @plants = Plant.all
+    end
+
     if params[:filter].present?
       @plants = @plants.where(category: params[:filter])
     end
+
+    @page = [params[:page].to_i, 1].max
+    @per_page = 6
+    @total_count = @plants.count
+    @total_pages = (@total_count.to_f / @per_page).ceil
+    @plants = @plants.offset((@page - 1) * @per_page).limit(@per_page)
   end
 
   def show

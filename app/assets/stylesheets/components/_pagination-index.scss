@@ -1,0 +1,15 @@
+.pagination-index {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.pagination-index-link {
+  background-color: transparent;
+  font-size:  17px;
+  color:darkgreen;
+  text-decoration: none;
+  margin: 20px;
+  font-weight: 600;
+}
