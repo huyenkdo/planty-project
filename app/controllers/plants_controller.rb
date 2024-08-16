@@ -41,7 +41,7 @@ class PlantsController < ApplicationController
   end
 
   def create
-    @plant = Plant.new(plants_params)
+    @plant = Plant.new(new_params)
     @plant.user = current_user
     if @plant.save
       redirect_to plant_path(@plant), notice: 'La plante a été créée avec succès.'
@@ -69,6 +69,10 @@ class PlantsController < ApplicationController
   private
 
   def plants_params
-    params.require(:plant).permit(:name, :category, :description, :price, photos: [])
+    params.require(:plant).permit(:name, :category, :description, :price, :photos)
+  end
+
+  def new_params
+    params.require(:plant).permit(:name, :category, :description, :price, photos:[])
   end
 end

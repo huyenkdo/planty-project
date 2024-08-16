@@ -6,7 +6,7 @@
         <%= simple_form_for(@plant) do |f| %>
 
           <div class="mb-3">
-            <%= f.label 'Nom :', class: 'form-label' %>
+            <%= f.label "Name :", class: 'form-label' %>
             <%= f.text_field :name, class: 'form-control' %>
           </div>
 
@@ -23,9 +23,6 @@
           <div class="mb-3">
             <%= f.label 'Prix :', class: 'form-label' %>
             <%= f.number_field :price, class: 'form-control' %>
-          </div>
-          <div class="mb-3">
-            <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           </div>
           <div class="text-center">
             <%= f.button :submit, "Mettre à jour", class: "btn btn-primary p-0" %>
