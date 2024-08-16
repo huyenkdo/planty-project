@@ -29,17 +29,13 @@
       <div class="card shadow" style="border-radius: 10px">
         <div class="card-body">
           <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Demandes de location</h5>
-          <p><%= @requests %></p>
           <% @own_plants.each do |plant| %>
             <% requests = plant.rentings %>
             <% requests.each do |request| %>
               <div class="d-flex mt-4">
-                <p><%= request.status %></p>
-                <p><%= request.user.id %></p>
-                <p><%= current_user.id %></p>
                 <% if request.status == 'Demande en attente' %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #EDD245"></i>
-                  <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestPending" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
+                  <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestPending-<%=request.id %>" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
                 <% elsif request.status == 'Demande acceptée' %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #34CA55"></i>
                   <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestAccepted" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
@@ -48,7 +44,7 @@
                   <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestRefused" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
                 <% end %>
                 <!-- Modal Pending -->
-                <div class="modal fade" id="rentingRequestPending" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal fade" id="rentingRequestPending-<%=request.id %>" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content px-3">
                       <div class="modal-header">
@@ -95,7 +91,7 @@
         <div class="card-body">
           <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Plantes louées</h5>
           <% @rentings.each do |renting| %>
-            <div class="d-flex border border-secondary-subtle py-2" style="border-radius: 10px">
+            <div class="d-flex border border-secondary-subtle py-2 mb-2" style="border-radius: 10px">
               <%= cl_image_tag renting.plant.photos.first.key, class: "rounded-circle m-4 my-auto", style: "width: 50px; object-fit: cover; height: 50px;" %>
               <div>
                 <p class="m-0 fw-bold"><%= renting.plant.name %></p>

@@ -7,9 +7,5 @@ class PagesController < ApplicationController
     @user = current_user
     @own_plants = @user.plants
     @rentings = @user.rentings
-    @requests = []
-    @own_plants.each do |plant|
-      @requests << plant.rentings
-    end
   end
 end
