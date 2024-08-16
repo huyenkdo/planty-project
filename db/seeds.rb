@@ -107,19 +107,47 @@ plants.each(&:save!)
 
 puts "#{Plant.count} plants created!"
 
-renting1 = Renting.create!(
+renting = Renting.create!(
   start_date: Date.today,
   end_date: Date.today + 7.days,
   status: "Demande acceptée",
   plant_id: Plant.where.not(user_id: user2.id).sample.id,
   user_id: user2.id
 )
+renting.update!(status: "Demande acceptée")
+p renting
+puts "\n\n\n"
 
-renting2 = Renting.create!(
+Renting.create!(
+  start_date: Date.today,
+  end_date: Date.today + 7.days,
+  status: "Demande en attente",
+  plant_id: Plant.where.not(user_id: user2.id).sample.id,
+  user_id: user2.id
+)
+
+p renting
+puts "\n\n\n"
+
+
+renting = Renting.create!(
+  start_date: Date.today,
+  end_date: Date.today + 7.days,
+  status: "Demande acceptée",
+  plant_id: Plant.where.not(user_id: user1.id).sample.id,
+  user_id: user1.id
+)
+renting.update!(status: "Demande acceptée")
+
+Renting.create!(
   start_date: Date.today + 1.day,
   end_date: Date.today + 10.days,
   status: "Demande en attente",
   plant_id: Plant.where.not(user_id: user1.id).sample.id,
   user_id: user1.id
 )
+
+p Renting.all
+
+
 puts "#{Renting.count} rentings created!"
