@@ -11,7 +11,7 @@ class RentingsController < ApplicationController
     if @renting.save
       redirect_to plant_path(plant), notice: "Votre demande de réservation a été envoyée avec succès."
     else
-      render :new, alert: "Il y a eu un problème avec votre demande de réservation."
+      render :show, alert: "Il y a eu un problème avec votre demande de réservation."
     end
   end
 
