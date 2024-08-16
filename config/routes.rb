@@ -4,10 +4,13 @@ Rails.application.routes.draw do
   resources :plants do
     resources :rentings, only: [:create]
   end
-  resources :rentings, only: [:show, :destroy]
+  resources :rentings, only: [:show, :destroy] do
+    member do
+      patch :accept
+      patch :deny
+    end
+  end
   get "/dashboard", to: "pages#dashboard", as: "dashboard"
-  patch "/rentings/:id", to: "rentings#accept"
-  patch "/rentings/:id", to: "rentings#deny"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

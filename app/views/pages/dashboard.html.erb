@@ -29,10 +29,14 @@
       <div class="card shadow" style="border-radius: 10px">
         <div class="card-body">
           <h5 class="card-title fw-bold fs-3 border-bottom pb-3 text-center text-primary">Demandes de location</h5>
+          <p><%= @requests %></p>
           <% @own_plants.each do |plant| %>
             <% requests = plant.rentings %>
             <% requests.each do |request| %>
               <div class="d-flex mt-4">
+                <p><%= request.status %></p>
+                <p><%= request.user.id %></p>
+                <p><%= current_user.id %></p>
                 <% if request.status == 'Demande en attente' %>
                   <i class="fa-solid fa-circle align-content-around" style="color: #EDD245"></i>
                   <button class="btn btn-link text-start text-decoration-none text-dark" data-bs-target="#rentingRequestPending" data-bs-toggle="modal" type="button"><%= request.status %> pour <%= plant.name %></button>
@@ -69,11 +73,13 @@
                         </div>
                       </div>
                       <div class="d-flex justify-content-center mb-4">
-                        <%= link_to "Refuser", controller: "pages", action: "deny", class: "btn me-5 rounded-pill",
+                        <%= link_to "Refuser", deny_renting_path(request), data: { 'turbo-method' => :patch }, class: "btn me-5 rounded-pill",
                                                                                         style: "background: #F6CCCC;
                                                                                                 width: 120px;
                                                                                                 color: #CA5834" %>
-                        <button type="button" class="btn btn-primary ms-5 rounded-pill text-white" style="width: 120px">Accepter</button>
+                        <%= link_to "Accepter", accept_renting_path(request), data: { 'turbo-method' => :patch },
+                                                                              class: "btn btn-primary ms-5 rounded-pill text-white",
+                                                                              style: "width: 120px" %>
                       </div>
                     </div>
                   </div>
