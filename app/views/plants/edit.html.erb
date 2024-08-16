@@ -28,7 +28,7 @@
             <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           </div>
           <div class="text-center">
-            <%= f.submit 'Mettre à jour', class: 'btn btn-primary' %>
+            <%= link_to 'Mis à jour', plant_path(@plant), class: 'btn btn-primary', type: 'button'%>
           </div>
 
         <% end %>
